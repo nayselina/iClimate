@@ -2,24 +2,25 @@ import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { FarmerColors } from '@/constants/farmer-colors';
-import { FarmerSidebar } from '@/components/farmer/FarmerSidebar';
-import { FarmerUIProvider } from '@/contexts/farmer-ui';
+import { ITColors } from '@/constants/it-colors';
+import { ITSidebar } from '@/components/it/ITSidebar';
+import { ITNotificationsPanel } from '@/components/it/ITNotificationsPanel';
+import { ITUIProvider } from '@/contexts/it-ui';
 
-export default function FarmerLayout() {
+export default function ITLayout() {
   return (
-    <FarmerUIProvider>
+    <ITUIProvider>
       <Tabs
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: FarmerColors.accent,
-          tabBarInactiveTintColor: FarmerColors.textFaint,
+          tabBarActiveTintColor: ITColors.accent,
+          tabBarInactiveTintColor: ITColors.textFaint,
           tabBarStyle: {
             height: 62,
             paddingTop: 6,
             paddingBottom: 10,
-            borderTopColor: FarmerColors.border,
-            backgroundColor: FarmerColors.card,
+            borderTopColor: ITColors.border,
+            backgroundColor: ITColors.card,
           },
           tabBarLabelStyle: {
             fontSize: 11,
@@ -34,35 +35,31 @@ export default function FarmerLayout() {
           }}
         />
         <Tabs.Screen
-          name="announcements"
+          name="users"
           options={{
-            title: 'Announce.',
-            tabBarIcon: ({ color, size }) => <Ionicons name="megaphone-outline" size={size} color={color} />,
+            title: 'Users',
+            tabBarIcon: ({ color, size }) => <Ionicons name="people-outline" size={size} color={color} />,
           }}
         />
         <Tabs.Screen
-          name="calendar"
+          name="reports"
           options={{
-            title: 'Calendar',
-            tabBarIcon: ({ color, size }) => <Ionicons name="calendar-outline" size={size} color={color} />,
+            title: 'Reports',
+            tabBarIcon: ({ color, size }) => <Ionicons name="bar-chart-outline" size={size} color={color} />,
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name="settings"
           options={{
-            title: 'Profile',
-            tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+            title: 'Settings',
+            tabBarIcon: ({ color, size }) => <Ionicons name="settings-outline" size={size} color={color} />,
           }}
         />
-
-        {/* Reachable via sidebar / bell / quick-access, hidden from the tab bar */}
-        <Tabs.Screen name="advisories" options={{ href: null }} />
-        <Tabs.Screen name="notifications" options={{ href: null }} />
-        <Tabs.Screen name="feedback" options={{ href: null }} />
       </Tabs>
 
-      {/* Rendered above the tab navigator so it overlays every screen */}
-      <FarmerSidebar />
-    </FarmerUIProvider>
+      {/* Rendered above the tab navigator so they overlay every screen */}
+      <ITSidebar />
+      <ITNotificationsPanel />
+    </ITUIProvider>
   );
 }
